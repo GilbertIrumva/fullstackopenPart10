@@ -1,7 +1,7 @@
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
 
 const httpLink = new HttpLink({
-  uri: 'http://192.168.0.189:4000',
+  uri: process.env.EXPO_PUBLIC_APOLLO_URI,
 });
 
 const apolloClient = new ApolloClient({
