@@ -1,8 +1,13 @@
 import { registerRootComponent } from 'expo';
+import { ApolloProvider } from '@apollo/client/react';
 
 import App from './App';
+import apolloClient from './apolloClient';
 
-// registerRootComponent calls AppRegistry.registerComponent('main', () => App);
-// It also ensures that whether you load the app in Expo Go or in a native build,
-// the environment is set up appropriately
-registerRootComponent(App);
+const Root = () => (
+  <ApolloProvider client={apolloClient}>
+    <App />
+  </ApolloProvider>
+);
+
+registerRootComponent(Root);
