@@ -1,59 +1,36 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
     padding: 15,
     backgroundColor: 'white',
   },
-  topRow: {
+  fullName: {
+    fontWeight: 'bold',
+    fontSize: 18,
+  },
+  description: {
+    marginVertical: 5,
+  },
+  language: {
+    marginBottom: 5,
+  },
+  stats: {
     flexDirection: 'row',
-    marginBottom: 12,
+    justifyContent: 'space-between',
+    marginTop: 5,
+  },
+  stat: {
+    alignItems: 'center',
+  },
+  statValue: {
+    fontWeight: 'bold',
   },
   avatar: {
     width: 50,
     height: 50,
     borderRadius: 5,
-    marginRight: 12,
-  },
-  repositoryInfo: {
-    flex: 1,
-  },
-  fullName: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 4,
-  },
-  description: {
-    color: '#586069',
-    lineHeight: 20,
-  },
-  language: {
-    alignSelf: 'flex-start',
-    backgroundColor: '#0366d6',
-    color: 'white',
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 4,
-    fontSize: 12,
-    fontWeight: 'bold',
-    marginBottom: 12,
-  },
-  statsRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  stat: {
-    alignItems: 'center',
-    flex: 1,
-  },
-  statValue: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 3,
-  },
-  statLabel: {
-    color: '#586069',
-    fontSize: 12,
+    marginBottom: 10,
   },
 });
 
@@ -67,44 +44,41 @@ const formatCount = (count) => {
 
 const RepositoryItem = ({ item }) => {
   return (
-    <View style={styles.container}>
-      <View style={styles.topRow}>
-        <Image
-          style={styles.avatar}
-          source={{ uri: item.ownerAvatarUrl }}
-        />
+    <View testID="repositoryItem" style={styles.container}>
+      <Image
+        style={styles.avatar}
+        source={{ uri: item.ownerAvatarUrl }}
+      />
 
-        <View style={styles.repositoryInfo}>
-          <Text style={styles.fullName}>{item.fullName}</Text>
-          <Text style={styles.description}>{item.description}</Text>
-        </View>
-      </View>
+      <Text style={styles.fullName}>{item.fullName}</Text>
+
+      <Text style={styles.description}>{item.description}</Text>
 
       <Text style={styles.language}>{item.language}</Text>
 
-      <View style={styles.statsRow}>
+      <View style={styles.stats}>
         <View style={styles.stat}>
           <Text style={styles.statValue}>
             {formatCount(item.stargazersCount)}
           </Text>
-          <Text style={styles.statLabel}>Stars</Text>
+          <Text>Stars</Text>
         </View>
 
         <View style={styles.stat}>
           <Text style={styles.statValue}>
             {formatCount(item.forksCount)}
           </Text>
-          <Text style={styles.statLabel}>Forks</Text>
+          <Text>Forks</Text>
         </View>
 
         <View style={styles.stat}>
           <Text style={styles.statValue}>{item.reviewCount}</Text>
-          <Text style={styles.statLabel}>Reviews</Text>
+          <Text>Reviews</Text>
         </View>
 
         <View style={styles.stat}>
           <Text style={styles.statValue}>{item.ratingAverage}</Text>
-          <Text style={styles.statLabel}>Rating</Text>
+          <Text>Rating</Text>
         </View>
       </View>
     </View>
