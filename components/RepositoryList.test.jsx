@@ -1,10 +1,16 @@
 /* global jest, describe, it, expect */
 
 import React from 'react';
+
 import { render, within } from '@testing-library/react-native';
 
 import RepositoryList from './RepositoryList';
+
 import useRepositories from '../hooks/useRepositories';
+
+jest.mock('react-router-native', () => ({
+  useNavigate: () => jest.fn(),
+}));
 
 jest.mock('../hooks/useRepositories', () => ({
   __esModule: true,
