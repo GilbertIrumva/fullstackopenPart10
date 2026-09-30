@@ -7,13 +7,10 @@ import {
 } from 'react-router-native';
 
 import AppBar from './AppBar';
-
 import RepositoryList from './RepositoryList';
-
 import Repository from './Repository';
-
 import SignIn from './SignIn';
-
+import SignUp from './SignUp';
 import CreateReview from './CreateReview';
 
 const styles = StyleSheet.create({
@@ -43,6 +40,11 @@ const Main = () => {
           <Route
             path="/signin"
             element={<SignIn />}
+          />
+
+          <Route
+            path="/signup"
+            element={<SignUp />}
           />
 
           <Route
