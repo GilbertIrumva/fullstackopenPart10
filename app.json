@@ -19,6 +19,18 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "2e13388f-f1e7-4262-8016-28fa358de78f"
+      }
+    },
+    "owner": "gilbertirumva",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/2e13388f-f1e7-4262-8016-28fa358de78f"
     }
   }
 }
