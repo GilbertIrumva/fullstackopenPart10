@@ -1,59 +1,45 @@
-import { StyleSheet, View } from 'react-native';
+import { Route, Routes } from 'react-router-native';
 
-import {
-  NativeRouter,
-  Route,
-  Routes,
-} from 'react-router-native';
-
-import AppBar from './AppBar';
 import RepositoryList from './RepositoryList';
 import Repository from './Repository';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import CreateReview from './CreateReview';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#e1e4e8',
-  },
-});
+import MyReviews from './MyReviews';
 
 const Main = () => {
   return (
-    <NativeRouter>
-      <View style={styles.container}>
-        <AppBar />
+    <Routes>
+      <Route
+        path="/"
+        element={<RepositoryList />}
+      />
 
-        <Routes>
-          <Route
-            path="/"
-            element={<RepositoryList />}
-          />
+      <Route
+        path="/repositories/:id"
+        element={<Repository />}
+      />
 
-          <Route
-            path="/repositories/:id"
-            element={<Repository />}
-          />
+      <Route
+        path="/signin"
+        element={<SignIn />}
+      />
 
-          <Route
-            path="/signin"
-            element={<SignIn />}
-          />
+      <Route
+        path="/signup"
+        element={<SignUp />}
+      />
 
-          <Route
-            path="/signup"
-            element={<SignUp />}
-          />
+      <Route
+        path="/createreview"
+        element={<CreateReview />}
+      />
 
-          <Route
-            path="/createreview"
-            element={<CreateReview />}
-          />
-        </Routes>
-      </View>
-    </NativeRouter>
+      <Route
+        path="/myreviews"
+        element={<MyReviews />}
+      />
+    </Routes>
   );
 };
 

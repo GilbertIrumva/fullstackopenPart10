@@ -7,7 +7,6 @@ import {
 } from 'react-native';
 
 import { Link } from 'react-router-native';
-
 import Constants from 'expo-constants';
 
 import {
@@ -16,7 +15,6 @@ import {
 } from '@apollo/client/react/index.js';
 
 import { ME } from '../graphql/queries';
-
 import AuthStorage from '../utils/authStorage';
 
 const styles = StyleSheet.create({
@@ -42,9 +40,7 @@ const styles = StyleSheet.create({
 
 const AppBar = () => {
   const { data } = useQuery(ME);
-
   const apolloClient = useApolloClient();
-
   const authStorage = new AuthStorage();
 
   const handleSignOut = async () => {
@@ -55,7 +51,11 @@ const AppBar = () => {
   return (
     <View style={styles.container}>
       <ScrollView horizontal contentContainerStyle={styles.tabs}>
-        <Link to="/" component={Pressable} style={styles.tab}>
+        <Link
+          to="/"
+          component={Pressable}
+          style={styles.tab}
+        >
           <Text style={styles.text}>Repositories</Text>
         </Link>
 
@@ -67,6 +67,14 @@ const AppBar = () => {
               style={styles.tab}
             >
               <Text style={styles.text}>Create a review</Text>
+            </Link>
+
+            <Link
+              to="/myreviews"
+              component={Pressable}
+              style={styles.tab}
+            >
+              <Text style={styles.text}>My reviews</Text>
             </Link>
 
             <Pressable
