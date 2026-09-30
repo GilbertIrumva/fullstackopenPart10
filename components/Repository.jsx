@@ -50,7 +50,9 @@ const RepositoryHeader = ({ repository }) => {
           style={styles.button}
           onPress={() => Linking.openURL(repository.url)}
         >
-          <Text style={styles.buttonText}>Open in GitHub</Text>
+          <Text style={styles.buttonText}>
+            Open in GitHub
+          </Text>
         </Pressable>
       </View>
     </View>
@@ -60,7 +62,12 @@ const RepositoryHeader = ({ repository }) => {
 const Repository = () => {
   const { id } = useParams();
 
-  const { repository, loading, error } = useRepository(id);
+  const {
+    repository,
+    loading,
+    error,
+    fetchMore,
+  } = useRepository(id);
 
   if (loading) {
     return <View />;
@@ -75,17 +82,26 @@ const Repository = () => {
     return <View />;
   }
 
-  const reviews = repository.reviews.edges.map((edge) => edge.node);
+  const reviews =
+    repository.reviews.edges.map((edge) => edge.node);
+
+  const onEndReach = () => {
+    fetchMore();
+  };
 
   return (
     <FlatList
       data={reviews}
-      renderItem={({ item }) => <ReviewItem review={item} />}
+      renderItem={({ item }) => (
+        <ReviewItem review={item} />
+      )}
       keyExtractor={({ id: reviewId }) => reviewId}
       ItemSeparatorComponent={ItemSeparator}
       ListHeaderComponent={() => (
         <RepositoryHeader repository={repository} />
       )}
+      onEndReached={onEndReach}
+      onEndReachedThreshold={0.5}
     />
   );
 };
