@@ -3,10 +3,13 @@ import {
   Pressable,
   StyleSheet,
   Text,
+  TextInput,
   View,
 } from 'react-native';
 
 import { useState } from 'react';
+
+import { useDebounce } from 'use-debounce';
 
 import { useNavigate } from 'react-router-native';
 
@@ -18,6 +21,16 @@ const styles = StyleSheet.create({
   header: {
     padding: 15,
     backgroundColor: '#e1e4e8',
+  },
+
+  searchInput: {
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: '#586069',
+    borderRadius: 4,
+    padding: 12,
+    marginBottom: 10,
+    fontSize: 16,
   },
 
   selector: {
@@ -63,7 +76,17 @@ const RepositoryList = () => {
 
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const { repositories, loading, error } = useRepositories(sort);
+  const [searchKeyword, setSearchKeyword] = useState('');
+
+  const [debouncedSearchKeyword] = useDebounce(
+    searchKeyword,
+    500
+  );
+
+  const { repositories, loading, error } = useRepositories({
+    ...sort,
+    searchKeyword: debouncedSearchKeyword,
+  });
 
   const navigate = useNavigate();
 
@@ -118,6 +141,14 @@ const RepositoryList = () => {
       ItemSeparatorComponent={ItemSeparator}
       ListHeaderComponent={
         <View style={styles.header}>
+          <TextInput
+            style={styles.searchInput}
+            value={searchKeyword}
+            onChangeText={setSearchKeyword}
+            placeholder="Search repositories"
+            autoCapitalize="none"
+          />
+
           <Pressable
             style={styles.selector}
             onPress={() => setMenuOpen(!menuOpen)}
